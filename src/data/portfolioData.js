@@ -114,7 +114,7 @@ export const projects = [
       action: "Mengekstraksi dan memvalidasi 98,666 pesanan berstatus Delivered dari 95,420 unique customers. Merancang Executive Dashboard interaktif dengan filter Tahun, Kategori Produk, State, dan Status Pesanan yang membedah Top 10 Kategori Produk (Health & Beauty, Watches & Gifts, Bed Bath Table), proporsi pembayaran (didominasi Credit Card & Boleto), serta perbandingan Delivery Time Aktual vs Estimasi per state.",
       impact: "Membuktikan bahwa ketepatan waktu pengiriman berdampak langsung terhadap reputasi platform: pesanan On-Time mencatat rata-rata Review Score tinggi (~4.2/5.0), sedangkan pesanan terlambat (Late Delivery) anjlok ke ~2.5/5.0. Insight ini menjadi dasar prioritas perbaikan SLA mitra logistik di state dengan waktu tempuh terlama seperti Bahia (BA) dan Rio de Janeiro (RJ)."
     },
-    githubUrl: "https://github.com/nofa054",
+    githubUrl: "https://github.com/nofa054/data-analyst-portfolio/tree/main/projects/01-brazilian-ecommerce-sales-logistics",
     liveUrl: "#projects",
     reportUrl: "#case-study-01"
   },
@@ -141,7 +141,7 @@ export const projects = [
       action: "Membersihkan dan memodelkan 8.000 data prospek pada funnel_clean.csv, memetakan Conversion Rate per Channel serta Rata-rata Sales Cycle (Hari) untuk seluruh channel akuisisi, dan menyertakan indikator transparansi kualitas data pada kartu Declared Revenue (R$ 61,8M di mana 94,66% baris bernilai R$ 0).",
       impact: "Mengidentifikasi Paid Search sebagai channel terukur dengan konversi tertinggi (12,30%, di luar Unknown/Direct ~16,5%), disusul Organic Search dan Direct Traffic (~11–12%). Sementara itu, Display Ads terbukti memiliki siklus closing tercepat (10,3 hari) dibanding Social Media (~60 hari), mendukung strategi realokasi budget akuisisi berbasis kecepatan dan konversi."
     },
-    githubUrl: "https://github.com/nofa054",
+    githubUrl: "https://github.com/nofa054/data-analyst-portfolio/tree/main/projects/02-olist-marketing-funnel-analysis",
     liveUrl: "#projects",
     reportUrl: "#case-study-02"
   },
@@ -168,7 +168,7 @@ export const projects = [
       action: "Membangun pipeline agregasi RFM menggunakan SQLite dan menerapkan algoritma K-Means Clustering (K=4) dengan skala Log-Log (Log10 Frequency vs Monetary) di Python. Memvisualisasikan 5 komponen analitik utama: distribusi jumlah pelanggan per segmen, kontribusi revenue per segmen, Kurva Pareto 80/20, scatter plot pemisahan ruang cluster, dan tren bulanan pelanggan Baru vs Repeat (2009-12 s.d. 2011-12).",
       impact: "Mengungkap konsentrasi Pareto di mana 23,04% pelanggan teratas menyumbang 80% total revenue—dengan segmen Champions (1.196 pelanggan / 20,35%) menghasilkan £12.83M (73,87% revenue). Menetapkan 1.459 pelanggan di segmen At Risk (24,82% populasi yang menyumbang £2.84M / 16,36% revenue) sebagai target prioritas kampanye win-back & retensi."
     },
-    githubUrl: "https://github.com/nofa054",
+    githubUrl: "https://github.com/nofa054/data-analyst-portfolio/tree/main/projects/03-customer-segmentation-rfm-kmeans",
     liveUrl: "#projects",
     reportUrl: "#case-study-03"
   }
