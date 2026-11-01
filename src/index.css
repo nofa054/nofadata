@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #060b18;
+    color: #e2e8f0;
+  }
+}
+
+/* Custom background pattern */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+.bg-radial-gradient {
+  background: radial-gradient(circle at 50% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 60%);
+}
+
+/* Glassmorphism effects */
+.glass-panel {
+  background: rgba(15, 26, 58, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(56, 189, 248, 0.15);
+}
+
+.glass-card {
+  background: linear-gradient(135deg, rgba(15, 26, 58, 0.75) 0%, rgba(11, 19, 43, 0.85) 100%);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #060b18;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+@keyframes cardWobble {
+  0% { transform: perspective(900px) rotateZ(0deg) rotateY(0deg) scale(1); }
+  15% { transform: perspective(900px) rotateZ(-6deg) rotateY(-12deg) scale(1.04); }
+  30% { transform: perspective(900px) rotateZ(5deg) rotateY(10deg) scale(1.04); }
+  45% { transform: perspective(900px) rotateZ(-4deg) rotateY(-8deg) scale(1.02); }
+  60% { transform: perspective(900px) rotateZ(2.5deg) rotateY(5deg) scale(1.01); }
+  75% { transform: perspective(900px) rotateZ(-1.2deg) rotateY(-2deg) scale(1); }
+  100% { transform: perspective(900px) rotateZ(0deg) rotateY(0deg) scale(1); }
+}
+
+.animate-card-wobble {
+  animation: cardWobble 0.75s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+

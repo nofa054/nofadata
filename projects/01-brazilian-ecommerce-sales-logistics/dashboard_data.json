@@ -1,0 +1,307 @@
+{
+  "kpi": {
+    "total_revenue": 15843553.24,
+    "total_orders": 98666,
+    "aov": 160.57763809214927,
+    "unique_customers": 95420,
+    "avg_review": 4.0331274393955665
+  },
+  "monthly": [
+    {
+      "order_purchase_month": "2017-01-01",
+      "item_total_revenue": 137188.49,
+      "year": "2017",
+      "month": "01"
+    },
+    {
+      "order_purchase_month": "2017-02-01",
+      "item_total_revenue": 286280.62,
+      "year": "2017",
+      "month": "02"
+    },
+    {
+      "order_purchase_month": "2017-03-01",
+      "item_total_revenue": 432048.59,
+      "year": "2017",
+      "month": "03"
+    },
+    {
+      "order_purchase_month": "2017-04-01",
+      "item_total_revenue": 412422.24,
+      "year": "2017",
+      "month": "04"
+    },
+    {
+      "order_purchase_month": "2017-05-01",
+      "item_total_revenue": 586190.95,
+      "year": "2017",
+      "month": "05"
+    },
+    {
+      "order_purchase_month": "2017-06-01",
+      "item_total_revenue": 502963.04,
+      "year": "2017",
+      "month": "06"
+    },
+    {
+      "order_purchase_month": "2017-07-01",
+      "item_total_revenue": 584971.62,
+      "year": "2017",
+      "month": "07"
+    },
+    {
+      "order_purchase_month": "2017-08-01",
+      "item_total_revenue": 668204.6,
+      "year": "2017",
+      "month": "08"
+    },
+    {
+      "order_purchase_month": "2017-09-01",
+      "item_total_revenue": 720398.91,
+      "year": "2017",
+      "month": "09"
+    },
+    {
+      "order_purchase_month": "2017-10-01",
+      "item_total_revenue": 769312.37,
+      "year": "2017",
+      "month": "10"
+    },
+    {
+      "order_purchase_month": "2017-11-01",
+      "item_total_revenue": 1179143.77,
+      "year": "2017",
+      "month": "11"
+    },
+    {
+      "order_purchase_month": "2017-12-01",
+      "item_total_revenue": 863547.23,
+      "year": "2017",
+      "month": "12"
+    },
+    {
+      "order_purchase_month": "2018-01-01",
+      "item_total_revenue": 1107301.89,
+      "year": "2018",
+      "month": "01"
+    },
+    {
+      "order_purchase_month": "2018-02-01",
+      "item_total_revenue": 986908.96,
+      "year": "2018",
+      "month": "02"
+    },
+    {
+      "order_purchase_month": "2018-03-01",
+      "item_total_revenue": 1155126.82,
+      "year": "2018",
+      "month": "03"
+    },
+    {
+      "order_purchase_month": "2018-04-01",
+      "item_total_revenue": 1159698.04,
+      "year": "2018",
+      "month": "04"
+    },
+    {
+      "order_purchase_month": "2018-05-01",
+      "item_total_revenue": 1149781.82,
+      "year": "2018",
+      "month": "05"
+    },
+    {
+      "order_purchase_month": "2018-06-01",
+      "item_total_revenue": 1022677.11,
+      "year": "2018",
+      "month": "06"
+    },
+    {
+      "order_purchase_month": "2018-07-01",
+      "item_total_revenue": 1058728.03,
+      "year": "2018",
+      "month": "07"
+    },
+    {
+      "order_purchase_month": "2018-08-01",
+      "item_total_revenue": 1003308.47,
+      "year": "2018",
+      "month": "08"
+    },
+    {
+      "order_purchase_month": "2018-09-01",
+      "item_total_revenue": 166.46,
+      "year": "2018",
+      "month": "09"
+    }
+  ],
+  "top_categories": [
+    {
+      "product_category": "Health Beauty",
+      "item_total_revenue": 1441248.07
+    },
+    {
+      "product_category": "Watches Gifts",
+      "item_total_revenue": 1305541.61
+    },
+    {
+      "product_category": "Bed Bath Table",
+      "item_total_revenue": 1241681.72
+    },
+    {
+      "product_category": "Sports Leisure",
+      "item_total_revenue": 1156656.48
+    },
+    {
+      "product_category": "Computers Accessories",
+      "item_total_revenue": 1059272.4
+    },
+    {
+      "product_category": "Furniture Decor",
+      "item_total_revenue": 902511.79
+    },
+    {
+      "product_category": "Housewares",
+      "item_total_revenue": 778397.77
+    },
+    {
+      "product_category": "Cool Stuff",
+      "item_total_revenue": 719329.95
+    },
+    {
+      "product_category": "Auto",
+      "item_total_revenue": 685384.32
+    },
+    {
+      "product_category": "Garden Tools",
+      "item_total_revenue": 584219.21
+    }
+  ],
+  "state_revenue": [
+    {
+      "customer_state": "SP",
+      "item_total_revenue": 5921678.12
+    },
+    {
+      "customer_state": "RJ",
+      "item_total_revenue": 2129681.98
+    },
+    {
+      "customer_state": "MG",
+      "item_total_revenue": 1856161.49
+    },
+    {
+      "customer_state": "RS",
+      "item_total_revenue": 885826.76
+    },
+    {
+      "customer_state": "PR",
+      "item_total_revenue": 800935.44
+    },
+    {
+      "customer_state": "BA",
+      "item_total_revenue": 611506.67
+    },
+    {
+      "customer_state": "SC",
+      "item_total_revenue": 610213.6
+    },
+    {
+      "customer_state": "DF",
+      "item_total_revenue": 353229.44
+    },
+    {
+      "customer_state": "GO",
+      "item_total_revenue": 347706.93
+    },
+    {
+      "customer_state": "ES",
+      "item_total_revenue": 324801.91
+    }
+  ],
+  "payments": [
+    {
+      "payment_type": "Boleto",
+      "item_total_revenue": 2842240.29
+    },
+    {
+      "payment_type": "Credit Card",
+      "item_total_revenue": 12434312.27
+    },
+    {
+      "payment_type": "Debit Card",
+      "item_total_revenue": 215107.72
+    },
+    {
+      "payment_type": "Not Defined",
+      "item_total_revenue": 143.46
+    },
+    {
+      "payment_type": "Voucher",
+      "item_total_revenue": 351749.5
+    }
+  ],
+  "delivery_state": [
+    {
+      "customer_state": "SP",
+      "actual_delivery_days": 8.723829209999353,
+      "estimated_delivery_days": 19.236901147643348
+    },
+    {
+      "customer_state": "RJ",
+      "actual_delivery_days": 15.148317545595928,
+      "estimated_delivery_days": 26.456736886752438
+    },
+    {
+      "customer_state": "MG",
+      "actual_delivery_days": 11.984005574049702,
+      "estimated_delivery_days": 24.622946504606332
+    },
+    {
+      "customer_state": "RS",
+      "actual_delivery_days": 15.189711397358552,
+      "estimated_delivery_days": 28.620185879667375
+    },
+    {
+      "customer_state": "PR",
+      "actual_delivery_days": 11.946574614976102,
+      "estimated_delivery_days": 24.73836077181802
+    },
+    {
+      "customer_state": "BA",
+      "actual_delivery_days": 19.24702688026066,
+      "estimated_delivery_days": 29.535650285093674
+    },
+    {
+      "customer_state": "SC",
+      "actual_delivery_days": 15.001756954612006,
+      "estimated_delivery_days": 25.874304538799414
+    },
+    {
+      "customer_state": "DF",
+      "actual_delivery_days": 12.959065817409765,
+      "estimated_delivery_days": 24.451549893842888
+    },
+    {
+      "customer_state": "GO",
+      "actual_delivery_days": 15.402327624066753,
+      "estimated_delivery_days": 26.998814229249014
+    },
+    {
+      "customer_state": "ES",
+      "actual_delivery_days": 15.647191011235956,
+      "estimated_delivery_days": 25.597438202247194
+    }
+  ],
+  "review_status": [
+    {
+      "delivery_status": "Late Delivery",
+      "review_score": 2.548943661971831,
+      "order_id": 7827
+    },
+    {
+      "delivery_status": "On-Time",
+      "review_score": 4.211416077502007,
+      "order_id": 88649
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+Tahap,Sisa_Baris,Baris_Terbuang,Pct_Terbuang_Dari_Awal
+0. Data Awal (Mentah),1067371,0,0.0
+1. Hapus Duplikat Identik,1033036,34335,3.22
+2. Hapus Customer ID Kosong (NaN),797885,235151,22.03
+3. Buang Invoice Batal (Awalan 'C'),779495,18390,1.72
+4. Buang Quantity <= 0 atau Price <= 0,779425,70,0.01

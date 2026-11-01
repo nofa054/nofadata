@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Funnel & Channel Performance Dashboard</title>
+    <!-- Google Font: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #0b1120;
+            color: #f1f5f9;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            letter-spacing: -0.01em;
+        }
+        .card {
+            background-color: #111a2e;
+            border: 1px solid #1e293b;
+            border-radius: 0.875rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+        .card:hover {
+            border-color: #334155;
+        }
+        .card-kpi-orange {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.08) 0%, rgba(17, 26, 46, 1) 100%);
+            border: 1px solid rgba(249, 115, 22, 0.35);
+        }
+        .card-kpi-blue {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(17, 26, 46, 1) 100%);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .badge-brand {
+            background-color: rgba(14, 165, 233, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .custom-scroll::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background-color: #334155;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 min-h-screen">
+
+    <!-- Header Section -->
+    <header class="mb-8 pb-5 border-b border-slate-800/80 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+            <div class="flex items-center gap-3">
+                <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+                    Marketing Funnel & Channel Performance
+                </h1>
+                <span class="px-3 py-0.5 text-xs font-semibold rounded-full badge-brand">
+                    Olist E-Commerce
+                </span>
+            </div>
+            <p class="text-sm text-slate-400 mt-1.5 font-normal">
+                Analisis Konversi Lead (MQL) ke Closed Deals, Kecepatan Closing, dan Optimasi Channel Pemasaran
+            </p>
+        </div>
+        <div class="flex items-center gap-2 text-xs text-slate-400 bg-slate-900/60 px-3.5 py-1.5 rounded-lg border border-slate-800 self-start md:self-auto">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>Data: <strong class="text-slate-200">funnel_clean.csv</strong> (8.000 Leads)</span>
+        </div>
+    </header>
+
+    <!-- KPI Metric Cards Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-7">
+        <!-- KPI 1: Total Leads -->
+        <div class="card p-5">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Leads</span>
+                <span class="text-slate-500 text-xs">MQL</span>
+            </div>
+            <h3 id="kpiTotalLeads" class="text-2xl md:text-3xl font-extrabold text-white mt-2">8.000</h3>
+            <p class="text-xs text-slate-400 mt-1.5">Semua prospek terdaftar</p>
+        </div>
+
+        <!-- KPI 2: Closed Deals -->
+        <div class="card card-kpi-blue p-5">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold text-sky-400 uppercase tracking-wider">Closed Deals</span>
+                <span class="text-xs font-semibold text-sky-400 bg-sky-500/10 px-1.5 py-0.5 rounded">Won</span>
+            </div>
+            <h3 id="kpiWonDeals" class="text-2xl md:text-3xl font-extrabold text-sky-400 mt-2">842</h3>
+            <p class="text-xs text-slate-400 mt-1.5">Transaksi berhasil closing</p>
+        </div>
+
+        <!-- KPI 3: Overall Conversion Rate (Highlighted) -->
+        <div class="card card-kpi-orange p-5">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold text-orange-400 uppercase tracking-wider">Conversion Rate</span>
+                <span class="text-xs font-semibold text-orange-400 bg-orange-500/15 px-1.5 py-0.5 rounded">Avg</span>
+            </div>
+            <h3 id="kpiConvRate" class="text-2xl md:text-3xl font-extrabold text-orange-400 mt-2">10,53%</h3>
+            <p class="text-xs text-slate-400 mt-1.5">Rasio konversi keseluruhan</p>
+        </div>
+
+        <!-- KPI 4: Sales Cycle -->
+        <div class="card p-5">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Avg Sales Cycle</span>
+                <span class="text-slate-500 text-xs">Durasi</span>
+            </div>
+            <h3 id="kpiAvgCycle" class="text-2xl md:text-3xl font-extrabold text-emerald-400 mt-2">
+                48,4 <span class="text-base font-medium text-slate-400">Hari</span>
+            </h3>
+            <p class="text-xs text-slate-400 mt-1.5">Median closing: 14 hari</p>
+        </div>
+
+        <!-- KPI 5: Declared Revenue with Context -->
+        <div class="card p-5 col-span-2 md:col-span-1">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Declared Revenue*</span>
+                <span class="text-amber-400 text-xs" title="94.66% bernilai 0">⚠️</span>
+            </div>
+            <h3 id="kpiDeclaredRev" class="text-2xl md:text-3xl font-extrabold text-purple-400 mt-2">R$ 61,8M</h3>
+            <p class="text-[11px] text-amber-400/90 mt-1.5 leading-tight">*94,66% data bernilai R$ 0</p>
+        </div>
+    </div>
+
+    <!-- Charts Row 1: Channel Conversion Rate & Sales Cycle -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-7">
+        <!-- Chart 1: Conversion Rate per Channel -->
+        <div class="card p-6">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-4 border-b border-slate-800/80 mb-5 gap-2">
+                <div>
+                    <h3 class="font-bold text-white text-base">Conversion Rate per Channel</h3>
+                    <p class="text-xs text-slate-400 mt-0.5">Persentase leads yang berhasil closing per channel pemasaran</p>
+                </div>
+                <span class="text-xs font-medium text-orange-400 bg-orange-500/10 px-2.5 py-1 rounded border border-orange-500/20 self-start sm:self-auto">
+                    Top: Paid Search (12,30%)
+                </span>
+            </div>
+            <div class="h-64">
+                <canvas id="convRateChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Chart 2: Sales Cycle Days per Channel -->
+        <div class="card p-6">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-4 border-b border-slate-800/80 mb-5 gap-2">
+                <div>
+                    <h3 class="font-bold text-white text-base">Rata-rata Sales Cycle (Hari)</h3>
+                    <p class="text-xs text-slate-400 mt-0.5">Waktu rata-rata dari first contact hingga deal closing (lebih pendek = lebih baik)</p>
+                </div>
+                <span class="text-xs font-medium text-sky-400 bg-sky-500/10 px-2.5 py-1 rounded border border-sky-500/20 self-start sm:self-auto">
+                    Tercepat: Display (10,3 Hari)
+                </span>
+            </div>
+            <div class="h-64">
+                <canvas id="salesCycleChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 2: Monthly Trend & Top Landing Pages -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-7">
+        <!-- Monthly Funnel Trend (2 Cols) -->
+        <div class="card p-6 lg:col-span-2">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-4 border-b border-slate-800/80 mb-5 gap-2">
+                <div>
+                    <h3 class="font-bold text-white text-base">Tren Bulanan Funnel (Leads vs Closed Deals)</h3>
+                    <p class="text-xs text-slate-400 mt-0.5">Pergerakan volume prospek baru, closing, dan tren rasio konversi per bulan</p>
+                </div>
+                <div class="flex items-center gap-4 text-xs">
+                    <span class="flex items-center gap-1.5 text-sky-400">
+                        <span class="w-2.5 h-2.5 rounded bg-sky-400"></span> Leads (MQL)
+                    </span>
+                    <span class="flex items-center gap-1.5 text-emerald-400">
+                        <span class="w-2.5 h-2.5 rounded bg-emerald-400"></span> Won Deals
+                    </span>
+                    <span class="flex items-center gap-1.5 text-orange-400">
+                        <span class="w-3 h-0.5 bg-orange-400"></span> Conv %
+                    </span>
+                </div>
+            </div>
+            <div class="h-64">
+                <canvas id="monthlyTrendChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Top Landing Pages Table (1 Col) -->
+        <div class="card p-6 flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between pb-3 border-b border-slate-800/80 mb-4">
+                    <div>
+                        <h3 class="font-bold text-white text-base">Top Landing Pages</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Filter: Minimal 30 Leads</p>
+                    </div>
+                    <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-semibold border border-slate-700">Top 10</span>
+                </div>
+                <div class="overflow-x-auto custom-scroll text-xs">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="text-slate-400 border-b border-slate-800 text-[11px] uppercase tracking-wider">
+                                <th class="pb-2.5 font-semibold">Landing Page</th>
+                                <th class="pb-2.5 text-right font-semibold">Leads</th>
+                                <th class="pb-2.5 text-right font-semibold">Won</th>
+                                <th class="pb-2.5 text-right font-semibold text-orange-400">Conv %</th>
+                            </tr>
+                        </thead>
+                        <tbody id="landingPageTableBody" class="divide-y divide-slate-800/60 font-medium">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-800/80 text-[11px] text-slate-400 flex items-center justify-between">
+                <span>Top Landing Page mencapai:</span>
+                <span class="text-orange-400 font-bold">20,8% Konversi</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 3: Business Segment Breakdown -->
+    <div class="card p-6 mb-7">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-4 border-b border-slate-800/80 mb-5 gap-2">
+            <div>
+                <h3 class="font-bold text-white text-base">Distribusi Deals per Segmen Bisnis (Top 8 Segments)</h3>
+                <p class="text-xs text-slate-400 mt-0.5">Kategori produk atau industri seller dengan jumlah transaksi closing terbanyak</p>
+            </div>
+            <span class="text-xs text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded border border-slate-700/60 self-start sm:self-auto">
+                Total Won Terbanyak: <strong>Home & Decor (105 deals)</strong>
+            </span>
+        </div>
+        <div class="h-60">
+            <canvas id="segmentChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Footer Notes -->
+    <footer class="text-xs text-slate-500 text-center py-4 border-t border-slate-800/80">
+        Marketing Funnel Portfolio Dashboard • Berbasis dataset Olist E-Commerce Brasil • Data terhubung ke <code class="text-slate-400 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800">funnel_clean.csv</code>
+    </footer>
+
+    <!-- Script Chart.js & Logic -->
+    <script>
+        const dashboardData = {"kpis": {"total_leads": 8000, "won_deals": 842, "conv_rate": 10.53, "avg_cycle": 48.4, "median_cycle": 14.0, "total_rev": 61784006.0, "zeros_rev_pct": 94.66}, "channels": [{"origin": "paid_search", "label": "Paid Search", "total_leads": 1586, "won_deals": 195, "avg_sales_cycle": 56.6, "conv_rate_pct": 12.3}, {"origin": "organic_search", "label": "Organic Search", "total_leads": 2296, "won_deals": 271, "avg_sales_cycle": 50.0, "conv_rate_pct": 11.8}, {"origin": "direct_traffic", "label": "Direct Traffic", "total_leads": 499, "won_deals": 56, "avg_sales_cycle": 31.1, "conv_rate_pct": 11.22}, {"origin": "referral", "label": "Referral", "total_leads": 284, "won_deals": 24, "avg_sales_cycle": 32.5, "conv_rate_pct": 8.45}, {"origin": "social", "label": "Social Media", "total_leads": 1350, "won_deals": 75, "avg_sales_cycle": 61.0, "conv_rate_pct": 5.56}, {"origin": "display", "label": "Display Ads", "total_leads": 118, "won_deals": 6, "avg_sales_cycle": 10.3, "conv_rate_pct": 5.08}, {"origin": "other_publicities", "label": "Other Publicities", "total_leads": 65, "won_deals": 3, "avg_sales_cycle": 39.3, "conv_rate_pct": 4.62}, {"origin": "email", "label": "Email Marketing", "total_leads": 493, "won_deals": 15, "avg_sales_cycle": 52.2, "conv_rate_pct": 3.04}, {"origin": "other", "label": "Other Channels", "total_leads": 150, "won_deals": 4, "avg_sales_cycle": 15.2, "conv_rate_pct": 2.67}, {"origin": "unknown", "label": "Unknown / Direct", "total_leads": 1159, "won_deals": 193, "avg_sales_cycle": 41.9, "conv_rate_pct": 16.65}], "monthly": [{"lead_month": "2017-06", "label": "Jun 17", "total_leads": 4, "won_deals": 0, "conv_rate_pct": 0.0}, {"lead_month": "2017-07", "label": "Jul 17", "total_leads": 239, "won_deals": 2, "conv_rate_pct": 0.84}, {"lead_month": "2017-08", "label": "Agu 17", "total_leads": 386, "won_deals": 9, "conv_rate_pct": 2.33}, {"lead_month": "2017-09", "label": "Sep 17", "total_leads": 312, "won_deals": 7, "conv_rate_pct": 2.24}, {"lead_month": "2017-10", "label": "Okt 17", "total_leads": 416, "won_deals": 14, "conv_rate_pct": 3.37}, {"lead_month": "2017-11", "label": "Nov 17", "total_leads": 445, "won_deals": 18, "conv_rate_pct": 4.04}, {"lead_month": "2017-12", "label": "Des 17", "total_leads": 200, "won_deals": 11, "conv_rate_pct": 5.5}, {"lead_month": "2018-01", "label": "Jan 18", "total_leads": 1141, "won_deals": 152, "conv_rate_pct": 13.32}, {"lead_month": "2018-02", "label": "Feb 18", "total_leads": 1028, "won_deals": 149, "conv_rate_pct": 14.49}, {"lead_month": "2018-03", "label": "Mar 18", "total_leads": 1174, "won_deals": 167, "conv_rate_pct": 14.22}, {"lead_month": "2018-04", "label": "Apr 18", "total_leads": 1352, "won_deals": 183, "conv_rate_pct": 13.54}, {"lead_month": "2018-05", "label": "Mei 18", "total_leads": 1303, "won_deals": 130, "conv_rate_pct": 9.98}], "landing_pages": [{"landing_page_id": "30077c17f2ec5010a82e37ad8925b95f", "total_leads": 48, "won_deals": 10, "conv_rate_pct": 20.83}, {"landing_page_id": "40dec9f3d5259a3d2dbcdab2114fae47", "total_leads": 330, "won_deals": 67, "conv_rate_pct": 20.3}, {"landing_page_id": "22c29808c4f815213303f8933030604c", "total_leads": 883, "won_deals": 174, "conv_rate_pct": 19.71}, {"landing_page_id": "b76ef37428e6799c421989521c0e5077", "total_leads": 912, "won_deals": 171, "conv_rate_pct": 18.75}, {"landing_page_id": "d83b0d0e48c8447d1d5507a44027a955", "total_leads": 34, "won_deals": 6, "conv_rate_pct": 17.65}, {"landing_page_id": "7fa6214d82e911d070f51ef79381b956", "total_leads": 68, "won_deals": 11, "conv_rate_pct": 16.18}, {"landing_page_id": "ce1a65abd0973638f1c887a6efcfa82d", "total_leads": 394, "won_deals": 59, "conv_rate_pct": 14.97}, {"landing_page_id": "b48ec5f3b04e9068441002a19df93c6c", "total_leads": 51, "won_deals": 7, "conv_rate_pct": 13.73}, {"landing_page_id": "35c9b150ab36fe584c1f24fd458c453a", "total_leads": 59, "won_deals": 8, "conv_rate_pct": 13.56}, {"landing_page_id": "241f79c7a8fe0270f4fb79fcbbcd17ad", "total_leads": 109, "won_deals": 14, "conv_rate_pct": 12.84}], "segments": [{"business_segment": "home_decor", "label": "Home & Decor", "deals": 105}, {"business_segment": "health_beauty", "label": "Health & Beauty", "deals": 93}, {"business_segment": "car_accessories", "label": "Car Accessories", "deals": 77}, {"business_segment": "household_utilities", "label": "Household Utilities", "deals": 71}, {"business_segment": "construction_tools_house_garden", "label": "Tools & Construction", "deals": 69}, {"business_segment": "audio_video_electronics", "label": "Audio & Electronics", "deals": 64}, {"business_segment": "computers", "label": "Computers & Tech", "deals": 34}, {"business_segment": "pet", "label": "Pet Supplies", "deals": 30}]};
+
+        const chartFont = {
+            family: "'Plus Jakarta Sans', -apple-system, sans-serif",
+            size: 11,
+            weight: '500'
+        };
+
+        function formatNumber(num) {
+            return Number(num).toLocaleString('id-ID');
+        }
+
+        function formatCurrency(num) {
+            if (num >= 1000000) {
+                return 'R$ ' + (num / 1000000).toLocaleString('id-ID', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + 'M';
+            }
+            return 'R$ ' + Number(num).toLocaleString('id-ID');
+        }
+
+        function initDashboard(data) {
+            // 1. Populate KPI Cards
+            document.getElementById('kpiTotalLeads').textContent = formatNumber(data.kpis.total_leads);
+            document.getElementById('kpiWonDeals').textContent = formatNumber(data.kpis.won_deals);
+            document.getElementById('kpiConvRate').textContent = data.kpis.conv_rate.toFixed(2).replace('.', ',') + '%';
+            document.getElementById('kpiAvgCycle').innerHTML = data.kpis.avg_cycle.toFixed(1).replace('.', ',') + ' <span class="text-base font-normal text-slate-400">Hari</span>';
+            document.getElementById('kpiDeclaredRev').textContent = formatCurrency(data.kpis.total_rev);
+
+            // 2. Populate Landing Page Table
+            const tableBody = document.getElementById('landingPageTableBody');
+            tableBody.innerHTML = '';
+            data.landing_pages.forEach((lp, index) => {
+                const tr = document.createElement('tr');
+                const badgeClass = lp.conv_rate_pct >= 18 ? 'text-orange-400 bg-orange-500/10' : 'text-slate-300 bg-slate-800/60';
+                tr.className = 'hover:bg-slate-800/30 transition-colors';
+                tr.innerHTML = `
+                    <td class="py-2.5 font-mono text-slate-300 flex items-center gap-1.5" title="${lp.landing_page_id}">
+                        <span class="text-[10px] text-slate-500 w-3.5">#${index + 1}</span>
+                        <span>${lp.landing_page_id.substring(0, 8)}...</span>
+                    </td>
+                    <td class="text-right text-slate-300 py-2.5">${formatNumber(lp.total_leads)}</td>
+                    <td class="text-right text-slate-300 py-2.5">${formatNumber(lp.won_deals)}</td>
+                    <td class="text-right py-2.5">
+                        <span class="px-1.5 py-0.5 rounded text-[11px] font-bold ${badgeClass}">
+                            ${lp.conv_rate_pct.toFixed(1).replace('.', ',')}%
+                        </span>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+
+            // 3. Render Charts
+            renderConvChart(data.channels);
+            renderCycleChart(data.channels);
+            renderMonthlyChart(data.monthly);
+            renderSegmentChart(data.segments);
+        }
+
+        // 1. Chart: Conversion Rate per Channel (1 Warna Gradasi Oranye)
+        function renderConvChart(channels) {
+            const sorted = [...channels].sort((a, b) => b.conv_rate_pct - a.conv_rate_pct);
+            const labels = sorted.map(c => c.label);
+            const values = sorted.map(c => c.conv_rate_pct);
+
+            const ctx = document.getElementById('convRateChart').getContext('2d');
+            const grad = ctx.createLinearGradient(0, 0, 0, 240);
+            grad.addColorStop(0, '#f97316');
+            grad.addColorStop(1, 'rgba(249, 115, 22, 0.15)');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: grad,
+                        hoverBackgroundColor: '#fb923c',
+                        borderRadius: 6,
+                        maxBarThickness: 42
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#0f172a',
+                            borderColor: '#334155',
+                            borderWidth: 1,
+                            padding: 10,
+                            titleFont: chartFont,
+                            bodyFont: chartFont,
+                            callbacks: {
+                                label: ctx => ` Conversion Rate: ${ctx.raw.toFixed(2)}%`
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(51, 65, 85, 0.25)' },
+                            ticks: {
+                                color: '#94a3b8',
+                                font: chartFont,
+                                callback: val => val + '%'
+                            }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: {
+                                color: '#cbd5e1',
+                                font: chartFont,
+                                maxRotation: 35,
+                                minRotation: 0
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 2. Chart: Sales Cycle per Channel (1 Warna Gradasi Biru/Cyan)
+        function renderCycleChart(channels) {
+            const sorted = [...channels].filter(c => c.avg_sales_cycle !== null).sort((a, b) => a.avg_sales_cycle - b.avg_sales_cycle);
+            const labels = sorted.map(c => c.label);
+            const values = sorted.map(c => c.avg_sales_cycle);
+
+            const ctx = document.getElementById('salesCycleChart').getContext('2d');
+            const grad = ctx.createLinearGradient(0, 0, 0, 240);
+            grad.addColorStop(0, '#38bdf8');
+            grad.addColorStop(1, 'rgba(56, 189, 248, 0.15)');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: grad,
+                        hoverBackgroundColor: '#7dd3fc',
+                        borderRadius: 6,
+                        maxBarThickness: 42
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#0f172a',
+                            borderColor: '#334155',
+                            borderWidth: 1,
+                            padding: 10,
+                            titleFont: chartFont,
+                            bodyFont: chartFont,
+                            callbacks: {
+                                label: ctx => ` Rata-rata: ${ctx.raw.toFixed(1)} hari`
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(51, 65, 85, 0.25)' },
+                            ticks: {
+                                color: '#94a3b8',
+                                font: chartFont,
+                                callback: val => val + ' hr'
+                            }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: {
+                                color: '#cbd5e1',
+                                font: chartFont,
+                                maxRotation: 35,
+                                minRotation: 0
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 3. Chart: Monthly Funnel Trend
+        function renderMonthlyChart(monthly) {
+            const labels = monthly.map(m => m.label);
+            const leads = monthly.map(m => m.total_leads);
+            const wons = monthly.map(m => m.won_deals);
+            const convs = monthly.map(m => m.conv_rate_pct);
+
+            const ctx = document.getElementById('monthlyTrendChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Total Leads (MQL)',
+                            data: leads,
+                            borderColor: '#38bdf8',
+                            backgroundColor: 'rgba(56, 189, 248, 0.12)',
+                            fill: true,
+                            tension: 0.35,
+                            borderWidth: 2.5,
+                            pointRadius: 3,
+                            pointHoverRadius: 6,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Won Deals',
+                            data: wons,
+                            borderColor: '#10b981',
+                            backgroundColor: '#10b981',
+                            tension: 0.35,
+                            borderWidth: 2,
+                            pointRadius: 3.5,
+                            pointHoverRadius: 6,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Conversion Rate (%)',
+                            data: convs,
+                            borderColor: '#f97316',
+                            borderDash: [5, 5],
+                            tension: 0.35,
+                            borderWidth: 2,
+                            pointRadius: 3,
+                            pointHoverRadius: 6,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#0f172a',
+                            borderColor: '#334155',
+                            borderWidth: 1,
+                            padding: 10,
+                            titleFont: chartFont,
+                            bodyFont: chartFont
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            grid: { color: 'rgba(51, 65, 85, 0.25)' },
+                            ticks: {
+                                color: '#94a3b8',
+                                font: chartFont
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            grid: { drawOnChartArea: false },
+                            ticks: {
+                                color: '#f97316',
+                                font: chartFont,
+                                callback: val => val + '%'
+                            }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: {
+                                color: '#cbd5e1',
+                                font: chartFont
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 4. Chart: Business Segment Breakdown
+        function renderSegmentChart(segments) {
+            const labels = segments.map(s => s.label);
+            const values = segments.map(s => s.deals);
+
+            const ctx = document.getElementById('segmentChart').getContext('2d');
+            const grad = ctx.createLinearGradient(0, 0, 0, 240);
+            grad.addColorStop(0, '#60a5fa');
+            grad.addColorStop(1, 'rgba(96, 165, 250, 0.15)');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Closed Deals (Won)',
+                        data: values,
+                        backgroundColor: grad,
+                        hoverBackgroundColor: '#93c5fd',
+                        borderRadius: 6,
+                        maxBarThickness: 48
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#0f172a',
+                            borderColor: '#334155',
+                            borderWidth: 1,
+                            padding: 10,
+                            titleFont: chartFont,
+                            bodyFont: chartFont,
+                            callbacks: {
+                                label: ctx => ` Total Closed Deals: ${ctx.raw} deals`
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(51, 65, 85, 0.25)' },
+                            ticks: {
+                                color: '#94a3b8',
+                                font: chartFont
+                            }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: {
+                                color: '#cbd5e1',
+                                font: chartFont
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        window.onload = function() {
+            initDashboard(dashboardData);
+        };
+    </script>
+</body>
+</html>
