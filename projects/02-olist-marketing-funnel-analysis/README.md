@@ -24,3 +24,4 @@ Evaluasi performa akuisisi prospek (*Marketing Qualified Leads* / MQL) hingga *C
 ## Temuan Utama (Key Insights)
 1. **Channel Konversi Terbaik:** *Paid Search* mencatat rasio konversi tertinggi di antara channel terukur (**12,30%**), disusul *Organic Search* dan *Direct Traffic*.
 2. **Kecepatan Closing (Sales Cycle):** *Display Ads* memiliki rata-rata siklus penutupan tercepat (**10,3 hari**), sementara *Social Media* membutuhkan waktu rata-rata paling lama (~60 hari).
+

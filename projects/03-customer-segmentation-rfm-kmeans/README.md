@@ -26,3 +26,4 @@ Implementasi segmentasi pelanggan berbasis **Recency, Frequency, dan Monetary (R
 1. **Konsentrasi Pareto 80/20:** **23,04% pelanggan teratas** menyumbang **80% total pendapatan** perusahaan.
 2. **Kontribusi Segmen Champions:** Sebanyak 1.196 pelanggan (20,35%) di segmen *Champions* menghasilkan **£12.83M (73,87% total revenue)**.
 3. **Prioritas Retensi (At Risk):** Sebanyak 1.459 pelanggan (24,82%) berada di segmen *At Risk* dengan nilai kontribusi **£2.84M (16,36% revenue)** yang memerlukan program retensi segera.
+

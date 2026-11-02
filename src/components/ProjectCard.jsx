@@ -7,21 +7,9 @@ import { GithubIcon } from './SocialIcons';
 import sampleImage from '../assets/sample-project-preview.jpg';
 
 export default function ProjectCard({ project, onOpenCaseStudy }) {
-  // Helper function to render text with bold emphasis
   const renderHighlightedText = (text) => {
     if (!text) return null;
-    const parts = text.split(/(\*\*.*?\*\*)/g);
-    return parts.map((part, index) => {
-      if (part.startsWith('**') && part.endsWith('**')) {
-        const clean = part.slice(2, -2);
-        return (
-          <strong key={index} className="text-white font-extrabold bg-sky-500/10 px-1 py-0.5 rounded border-b-2 border-amber-400">
-            {clean}
-          </strong>
-        );
-      }
-      return <span key={index}>{part}</span>;
-    });
+    return text.replace(/\*\*/g, '');
   };
 
   return (

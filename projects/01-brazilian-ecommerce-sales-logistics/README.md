@@ -26,3 +26,4 @@ Analisis komprehensif terhadap **98.666 pesanan selesai** pada dataset publik Ol
 1. **Konsentrasi Pasar:** Wilayah São Paulo (SP), Rio de Janeiro (RJ), dan Minas Gerais (MG) menyumbang porsi pendapatan terbesar.
 2. **Kategori Produk Teratas:** *Health & Beauty*, *Watches & Gifts*, dan *Bed Bath Table* menjadi penyumbang omset tertinggi.
 3. **Dampak Keterlambatan Logistik:** Pesanan yang tiba tepat waktu (*On Time*) memperoleh rata-rata **Review Score ~4.21/5.0**, sedangkan pesanan yang terlambat (*Late Delivery*) turun drastis ke **~2.54/5.0**.
+
